@@ -1,176 +1,340 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="HALLHA - أدوات ذكية ومجانية تساعدك في حياتك اليومية">
-<title>HALLHA | كل مشكلة لها حل</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="HALLHA - Free online tools for everyone">
+<title>HALLHA | Every Problem Has a Solution</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#080d19;color:#fff;line-height:1.7}
-header{padding:20px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #263047}
-.logo{font-size:27px;font-weight:bold;color:#70a5ff}
-nav{display:flex;gap:20px;align-items:center}
-nav a{color:#ddd;text-decoration:none}
-.hero{text-align:center;padding:75px 20px 55px;background:radial-gradient(ellipse at top,#192c55,#080d19 70%)}
-.hero h1{font-size:42px;margin-bottom:15px}
+*{box-sizing:border-box}
+body{margin:0;background:#080e1c;color:#fff;font-family:Arial,sans-serif;line-height:1.7}
+header{padding:17px 5%;display:flex;justify-content:space-between;align-items:center;background:#101a2e;border-bottom:1px solid #263650;position:sticky;top:0;z-index:10}
+.logo{font-size:27px;font-weight:bold;color:#73a9ff}
+button,input,textarea{font:inherit}
+button{cursor:pointer;border:0;border-radius:9px;padding:11px 17px;background:#3979ee;color:white}
+button:hover{opacity:.85}
+.secondary{background:#263750}
+.hero{text-align:center;padding:65px 15px;background:radial-gradient(ellipse at top,#1b3561,#080e1c 75%)}
+.hero h1{font-size:42px;margin:0 0 12px}
 .hero h1 span{color:#70a5ff}
-.hero p{color:#b7c1d5;font-size:17px;margin-bottom:25px}
-.search{max-width:550px;margin:auto;display:flex;background:white;border-radius:12px;overflow:hidden;padding:5px}
-.search input{flex:1;min-width:0;border:0;padding:14px;outline:none;font-size:16px}
-.search button{background:#3979ee;color:white;border:0;padding:12px 20px;border-radius:9px}
-.container{max-width:1100px;margin:45px auto;padding:0 18px}
-.section-title{text-align:center;font-size:27px;margin-bottom:25px}
-.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-.tool{background:#111b30;border:1px solid #273653;border-radius:15px;padding:24px;text-decoration:none;color:white;transition:.2s}
-.tool:hover{border-color:#70a5ff;transform:translateY(-4px)}
-.tool .emoji{font-size:32px}
-.tool h3{margin:10px 0 5px}
-.tool p{color:#aab6cb;font-size:14px}
-.badge{display:inline-block;background:#18345d;color:#8cb7ff;padding:4px 10px;border-radius:20px;font-size:12px;margin-top:12px}
-footer{text-align:center;padding:30px;color:#8c99af;border-top:1px solid #263047;margin-top:50px}
-#message{color:#8cb7ff;text-align:center;margin-top:15px}
-button,a{cursor:pointer}
-@media(max-width:600px){.hero h1{font-size:31px}nav{gap:10px;font-size:13px}}
+.hero p{color:#b6c4dc}
+.search{display:flex;max-width:560px;margin:25px auto;background:white;padding:5px;border-radius:12px}
+.search input{border:0;outline:0;flex:1;min-width:0;padding:12px;color:#111}
+.container{max-width:1100px;margin:35px auto;padding:0 16px}
+h2{text-align:center;margin-bottom:25px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.card{background:#111d33;border:1px solid #293d5e;padding:20px;border-radius:14px;cursor:pointer;transition:.2s}
+.card:hover{transform:translateY(-3px);border-color:#70a5ff}
+.card .emoji{font-size:32px}
+.card h3{margin:5px 0}
+.card p{color:#aab9d1;font-size:14px}
+.badge{color:#8eb9ff;font-size:12px}
+.tool{display:none;background:#111d33;border:1px solid #293d5e;padding:23px;border-radius:15px;margin:20px 0}
+.tool.active{display:block}
+.tool h2{text-align:right}
+.field{display:block;width:100%;padding:12px;margin:10px 0;background:#f4f6fa;color:#111;border:1px solid #ccd3df;border-radius:8px}
+.result{color:#8fbcff;margin-top:15px;overflow-wrap:anywhere}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
+footer{text-align:center;padding:30px;color:#8293ad;border-top:1px solid #263650;margin-top:50px}
+a{color:#8fbcff}
+.hidden{display:none!important}
+@media(max-width:600px){.hero h1{font-size:30px}header{padding:12px 4%}}
 </style>
 </head>
 <body>
+
 <header>
 <div class="logo">HALLHA</div>
-<nav>
-<a href="#tools">الأدوات</a>
-<a href="#about">عن المنصة</a>
-<button onclick="toggleLanguage()" style="padding:8px 12px;border:1px solid #5275ae;border-radius:8px;background:transparent;color:white">EN / AR</button>
-</nav>
+<div>
+<button class="secondary" onclick="toggleLang()" id="langBtn">English</button>
+</div>
 </header>
 
 <section class="hero">
 <h1 id="headline">كل مشكلة لها <span>حل</span></h1>
-<p id="subtitle">أدوات مجانية وذكية تساعدك على إنجاز مهامك بسهولة.</p>
+<p id="subtitle">أدوات مجانية تساعدك على إنجاز مهامك بسهولة.</p>
 <div class="search">
 <input id="search" placeholder="ابحث عن الأداة التي تحتاجها...">
-<button onclick="searchTools()" id="searchButton">بحث</button>
+<button onclick="searchTools()" id="searchBtn">بحث</button>
 </div>
-<div id="message"></div>
 </section>
 
-<main class="container" id="tools">
-<h2 class="section-title" id="toolsTitle">اكتشف أدواتنا</h2>
-<div class="tools" id="toolList">
-<div class="tool" data-search="pdf ملفات تحويل دمج ضغط">
-<div class="emoji">📄</div><h3>أدوات PDF</h3><p>إدارة ملفات PDF بسهولة.</p><span class="badge">مجاني</span>
+<main class="container">
+<h2 id="toolsTitle">اكتشف أدوات HALLHA</h2>
+
+<div class="grid" id="cards">
+
+<div class="card" data-name="pdf ملفات دمج ضغط">
+<div class="emoji">📄</div>
+<h3 data-ar="دمج ملفات PDF" data-en="Merge PDF">دمج ملفات PDF</h3>
+<p data-ar="اجمع ملفات PDF في ملف واحد." data-en="Combine PDF files into one.">اجمع ملفات PDF في ملف واحد.</p>
+<span class="badge">FREE</span>
 </div>
-<div class="tool" data-search="image صور ضغط حجم">
-<div class="emoji">🖼️</div><h3>أدوات الصور</h3><p>ضغط الصور وتغيير أحجامها.</p><span class="badge">مجاني</span>
+
+<div class="card" data-name="صور image ضغط">
+<div class="emoji">🖼️</div>
+<h3 data-ar="ضغط الصور" data-en="Image Compressor">ضغط الصور</h3>
+<p data-ar="قلل حجم الصور وحملها." data-en="Compress and download images.">قلل حجم الصور وحملها.</p>
+<span class="badge">FREE</span>
 </div>
-<div class="tool" data-search="calculator حاسبة حساب">
-<div class="emoji">🧮</div><h3>الحاسبات الذكية</h3><p>احسب النسب والأرباح والخصومات.</p><span class="badge">مجاني</span>
+
+<div class="card" data-name="حاسبة calculator أرباح">
+<div class="emoji">🧮</div>
+<h3 data-ar="حاسبة الأرباح" data-en="Profit Calculator">حاسبة الأرباح</h3>
+<p data-ar="احسب الأرباح والنسب والخصومات." data-en="Calculate profit and discounts.">احسب الأرباح والنسب والخصومات.</p>
+<span class="badge">FREE</span>
 </div>
-<div class="tool" data-search="cv jobs وظيفة سيرة ذاتية">
-<div class="emoji">💼</div><h3>إنشاء السيرة الذاتية</h3><p>جهز سيرتك الذاتية باحترافية.</p><span class="badge">مجاني</span>
+
+<div class="card" data-name="qr رمز">
+<div class="emoji">🔳</div>
+<h3 data-ar="إنشاء QR" data-en="QR Generator">إنشاء QR</h3>
+<p data-ar="حول النص أو الرابط إلى رمز QR." data-en="Convert text or links to QR.">حول النص أو الرابط إلى رمز QR.</p>
+<span class="badge">FREE</span>
 </div>
-<div class="tool" data-search="qr code رمز">
-<div class="emoji">🔳</div><h3>إنشاء QR</h3><p>أنشئ رمز QR بسهولة.</p><span class="badge">مجاني</span>
+
+<div class="card" data-name="نصوص text كتابة">
+<div class="emoji">✍️</div>
+<h3 data-ar="أدوات النصوص" data-en="Text Tools">أدوات النصوص</h3>
+<p data-ar="احسب الكلمات والحروف وغير حالة الأحرف." data-en="Count words and change text case.">احسب الكلمات والحروف وغير حالة الأحرف.</p>
+<span class="badge">FREE</span>
 </div>
-<div class="tool" data-search="text كتابة ترجمة">
-<div class="emoji">✍️</div><h3>أدوات النصوص</h3><p>أدوات مفيدة لتنظيم النصوص.</p><span class="badge">مجاني</span>
+
+<div class="card" data-name="cv وظيفة سيرة ذاتية">
+<div class="emoji">💼</div>
+<h3 data-ar="إنشاء CV" data-en="CV Builder">إنشاء CV</h3>
+<p data-ar="أنشئ سيرة ذاتية قابلة للطباعة." data-en="Create a printable resume.">أنشئ سيرة ذاتية قابلة للطباعة.</p>
+<span class="badge">FREE</span>
 </div>
-<div class="tool" data-search="ai ذكاء اصطناعي">
-<div class="emoji">🤖</div><h3>الذكاء الاصطناعي</h3><p>مساعدك لإنجاز المهام بذكاء.</p><span class="badge">قريبًا</span>
+
 </div>
-<div class="tool" data-search="currency عملات تحويل">
-<div class="emoji">🌍</div><h3>الأدوات العالمية</h3><p>أدوات تساعدك أينما كنت.</p><span class="badge">قريبًا</span>
+
+<!-- PDF TOOL -->
+<section class="tool" id="pdfTool">
+<h2>📄 دمج ملفات PDF</h2>
+<p>اختر ملفين PDF أو أكثر.</p>
+<input class="field" type="file" id="pdfFiles" accept=".pdf,application/pdf" multiple>
+<button onclick="mergePDF()">دمج الملفات وتنزيلها</button>
+<p class="result" id="pdfResult"></p>
+</section>
+
+<!-- IMAGE TOOL -->
+<section class="tool" id="imageTool">
+<h2>🖼️ ضغط الصور</h2>
+<input class="field" type="file" id="imageFile" accept="image/*">
+<label>جودة الصورة</label>
+<input class="field" type="range" id="quality" min="10" max="100" value="75">
+<button onclick="compressImage()">ضغط الصورة</button>
+<p class="result" id="imageResult"></p>
+<a id="imageDownload" class="hidden" download="HALLHA-image.jpg">تنزيل الصورة</a>
+</section>
+
+<!-- CALCULATOR -->
+<section class="tool" id="calcTool">
+<h2>🧮 حاسبة الأرباح والخصومات</h2>
+<label>التكلفة أو السعر الأصلي</label>
+<input class="field" type="number" id="cost" placeholder="أدخل السعر">
+<label>سعر البيع أو نسبة الخصم</label>
+<input class="field" type="number" id="sale" placeholder="أدخل الرقم">
+<div class="actions">
+<button onclick="calculateProfit()">حساب الربح</button>
+<button onclick="calculateDiscount()">حساب الخصم %</button>
 </div>
+<p class="result" id="calcResult"></p>
+</section>
+
+<!-- QR -->
+<section class="tool" id="qrTool">
+<h2>🔳 إنشاء QR Code</h2>
+<input class="field" id="qrText" placeholder="اكتب نصًا أو رابطًا">
+<button onclick="makeQR()">إنشاء الرمز</button>
+<div id="qrOutput" style="margin-top:20px;background:white;width:max-content;max-width:100%;padding:12px;border-radius:8px"></div>
+</section>
+
+<!-- TEXT -->
+<section class="tool" id="textTool">
+<h2>✍️ أدوات النصوص</h2>
+<textarea class="field" id="textInput" rows="7" placeholder="اكتب النص هنا"></textarea>
+<div class="actions">
+<button onclick="countText()">عدد الكلمات والحروف</button>
+<button onclick="changeCase('upper')">UPPERCASE</button>
+<button onclick="changeCase('lower')">lowercase</button>
+<button onclick="changeCase('clear')">مسح</button>
 </div>
+<p class="result" id="textResult"></p>
+</section>
+
+<!-- CV -->
+<section class="tool" id="cvTool">
+<h2>💼 إنشاء سيرة ذاتية</h2>
+<input class="field" id="cvName" placeholder="الاسم الكامل">
+<input class="field" id="cvEmail" placeholder="البريد الإلكتروني">
+<input class="field" id="cvPhone" placeholder="رقم الهاتف">
+<input class="field" id="cvJob" placeholder="المسمى الوظيفي">
+<textarea class="field" id="cvAbout" placeholder="نبذة عنك" rows="4"></textarea>
+<textarea class="field" id="cvSkills" placeholder="المهارات" rows="3"></textarea>
+<button onclick="makeCV()">إنشاء وطباعة السيرة الذاتية</button>
+</section>
+
 </main>
 
-<section class="container" id="about">
-<h2 class="section-title">HALLHA - Every Problem Has a Solution</h2>
-<p style="text-align:center;color:#aab6cb">منصة عالمية هدفها تسهيل حياتك من خلال أدوات رقمية بسيطة ومفيدة.</p>
-</section>
+<footer>
+<strong>HALLHA</strong>
+<p>Every Problem Has a Solution</p>
+<p>© 2026 HALLHA. All rights reserved.</p>
+</footer>
 
-<footer>© 2026 HALLHA. All rights reserved.</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
 let english=false;
-function toggleLanguage(){
+
+const cards=document.querySelectorAll('.card');
+const tools={
+pdf:'pdfTool',
+image:'imageTool',
+calc:'calcTool',
+qr:'qrTool',
+text:'textTool',
+cv:'cvTool'
+};
+
+cards.forEach((card,index)=>{
+card.addEventListener('click',()=>{
+document.querySelectorAll('.tool').forEach(t=>t.classList.remove('active'));
+const id=Object.values(tools)[index];
+document.getElementById(id).classList.add('active');
+document.getElementById(id).scrollIntoView({behavior:'smooth'});
+});
+});
+
+function searchTools(){
+const q=document.getElementById('search').value.trim().toLowerCase();
+cards.forEach(card=>{
+card.style.display=(card.innerText.toLowerCase().includes(q)||card.dataset.name.includes(q))?'block':'none';
+});
+}
+
+document.getElementById('search').addEventListener('input',searchTools);
+
+function toggleLang(){
 english=!english;
 document.documentElement.lang=english?'en':'ar';
 document.documentElement.dir=english?'ltr':'rtl';
+document.getElementById('langBtn').textContent=english?'العربية':'English';
 document.getElementById('headline').innerHTML=english?'Every Problem Has a <span>Solution</span>':'كل مشكلة لها <span>حل</span>';
-document.getElementById('subtitle').textContent=english?'Free and smart tools to make your daily tasks easier.':'أدوات مجانية وذكية تساعدك على إنجاز مهامك بسهولة.';
-document.getElementById('toolsTitle').textContent=english?'Explore Our Tools':'اكتشف أدواتنا';
+document.getElementById('subtitle').textContent=english?'Free tools to make your daily tasks easier.':'أدوات مجانية تساعدك على إنجاز مهامك بسهولة.';
+document.getElementById('toolsTitle').textContent=english?'Explore HALLHA Tools':'اكتشف أدوات HALLHA';
 document.getElementById('search').placeholder=english?'Search for a tool...':'ابحث عن الأداة التي تحتاجها...';
-document.getElementById('searchButton').textContent=english?'Search':'بحث';
-}
-function searchTools(){
-let q=document.getElementById('search').value.toLowerCase().trim();
-let cards=document.querySelectorAll('.tool');
-let count=0;
-cards.forEach(card=>{
-let show=card.textContent.toLowerCase().includes(q)||card.dataset.search.includes(q);
-card.style.display=show?'block':'none';
-if(show)count++;
+document.getElementById('searchBtn').textContent=english?'Search':'بحث';
+document.querySelectorAll('[data-ar]').forEach(el=>{
+el.textContent=english?el.dataset.en:el.dataset.ar;
 });
-document.getElementById('message').textContent=q?(count?'تم العثور على '+count+' أدوات':'لم يتم العثور على أدوات'):'';
 }
-document.getElementById('search').addEventListener('input',searchTools);
-</script>
-</body><section style="background:#111b30;padding:25px;border-radius:15px;margin:30px 15px;text-align:center;border:1px solid #273653">
-<h2>📄 دمج ملفات PDF</h2>
-<p style="color:#b7c1d5">اختر ملفين PDF أو أكثر لدمجهم في ملف واحد</p>
 
-<input type="file" id="pdfFiles" accept=".pdf,application/pdf" multiple style="margin:20px;color:white;max-width:100%">
-
-<br>
-
-<button onclick="mergePDF()" style="background:#3979ee;color:white;border:0;padding:13px 25px;border-radius:9px">
-دمج الملفات
-</button>
-
-<p id="pdfStatus" style="margin-top:15px;color:#8cb7ff"></p>
-</section>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-
-<script>
 async function mergePDF(){
- const input=document.getElementById("pdfFiles");
- const status=document.getElementById("pdfStatus");
- const files=Array.from(input.files);
+const files=[...document.getElementById('pdfFiles').files];
+const result=document.getElementById('pdfResult');
+if(files.length<2){result.textContent='اختر ملفين على الأقل';return;}
+if(!window.PDFLib){result.textContent='تعذر تحميل مكتبة PDF. تحقق من الإنترنت.';return;}
+try{
+result.textContent='جاري الدمج...';
+const merged=await PDFLib.PDFDocument.create();
+for(const file of files){
+const bytes=await file.arrayBuffer();
+const pdf=await PDFLib.PDFDocument.load(bytes);
+const pages=await merged.copyPages(pdf,pdf.getPageIndices());
+pages.forEach(p=>merged.addPage(p));
+}
+const bytes=await merged.save();
+const url=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));
+const a=document.createElement('a');
+a.href=url;a.download='HALLHA-Merged.pdf';a.click();
+setTimeout(()=>URL.revokeObjectURL(url),3000);
+result.textContent='تم دمج الملفات بنجاح!';
+}catch(e){result.textContent='حدث خطأ. تأكد من سلامة ملفات PDF.';}
+}
 
- if(files.length<2){
-  status.textContent="اختر ملفين PDF على الأقل";
-  return;
- }
+function compressImage(){
+const file=document.getElementById('imageFile').files[0];
+const result=document.getElementById('imageResult');
+if(!file){result.textContent='اختر صورة أولاً';return;}
+const reader=new FileReader();
+reader.onload=e=>{
+const img=new Image();
+img.onload=()=>{
+const canvas=document.createElement('canvas');
+canvas.width=img.width;canvas.height=img.height;
+canvas.getContext('2d').drawImage(img,0,0);
+const quality=Number(document.getElementById('quality').value)/100;
+canvas.toBlob(blob=>{
+if(!blob){result.textContent='تعذر ضغط الصورة';return;}
+const url=URL.createObjectURL(blob);
+const link=document.getElementById('imageDownload');
+link.href=url;link.classList.remove('hidden');
+result.textContent='الحجم الأصلي: '+Math.round(file.size/1024)+' KB | الحجم الجديد: '+Math.round(blob.size/1024)+' KB';
+},'image/jpeg',quality);
+};
+img.onerror=()=>result.textContent='تعذر قراءة الصورة';
+img.src=e.target.result;
+};
+reader.readAsDataURL(file);
+}
 
- try{
-  status.textContent="جاري دمج الملفات...";
-  const merged=await PDFLib.PDFDocument.create();
+function calculateProfit(){
+const cost=Number(document.getElementById('cost').value);
+const sale=Number(document.getElementById('sale').value);
+const r=document.getElementById('calcResult');
+if(!Number.isFinite(cost)||!Number.isFinite(sale)||cost<=0){r.textContent='أدخل قيمًا صحيحة';return;}
+r.textContent='الربح: '+(sale-cost).toFixed(2)+' | هامش الربح: '+(((sale-cost)/sale)*100).toFixed(2)+'%';
+}
 
-  for(const file of files){
-   const bytes=await file.arrayBuffer();
-   const pdf=await PDFLib.PDFDocument.load(bytes);
-   const pages=await merged.copyPages(pdf,pdf.getPageIndices());
-   pages.forEach(page=>merged.addPage(page));
-  }
+function calculateDiscount(){
+const price=Number(document.getElementById('cost').value);
+const percent=Number(document.getElementById('sale').value);
+const r=document.getElementById('calcResult');
+if(!Number.isFinite(price)||!Number.isFinite(percent)||price<0||percent<0||percent>100){r.textContent='أدخل سعرًا صحيحًا ونسبة بين 0 و100';return;}
+r.textContent='قيمة الخصم: '+(price*percent/100).toFixed(2)+' | السعر بعد الخصم: '+(price*(1-percent/100)).toFixed(2);
+}
 
-  const result=await merged.save();
-  const blob=new Blob([result],{type:"application/pdf"});
-  const url=URL.createObjectURL(blob);
-  const link=document.createElement("a");
+function makeQR(){
+const value=document.getElementById('qrText').value.trim();
+const output=document.getElementById('qrOutput');
+output.innerHTML='';
+if(!value){output.textContent='اكتب نصًا أو رابطًا أولاً';return;}
+if(!window.QRCode){output.textContent='تعذر تحميل مكتبة QR';return;}
+new QRCode(output,{text:value,width:200,height:200});
+}
 
-  link.href=url;
-  link.download="HALLHA-Merged.pdf";
-  link.click();
+function countText(){
+const text=document.getElementById('textInput').value;
+const words=text.trim()?text.trim().split(/\s+/).length:0;
+document.getElementById('textResult').textContent='الكلمات: '+words+' | الحروف: '+text.length;
+}
 
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-  status.textContent="تم دمج الملفات بنجاح!";
+function changeCase(type){
+const input=document.getElementById('textInput');
+if(type==='upper')input.value=input.value.toUpperCase();
+if(type==='lower')input.value=input.value.toLowerCase();
+if(type==='clear')input.value='';
+countText();
+}
 
- }catch(error){
-  status.textContent="حدث خطأ. تأكد أن الملفات PDF سليمة.";
-  console.error(error);
- }
+function makeCV(){
+const name=document.getElementById('cvName').value.trim();
+const email=document.getElementById('cvEmail').value.trim();
+const phone=document.getElementById('cvPhone').value.trim();
+const job=document.getElementById('cvJob').value.trim();
+const about=document.getElementById('cvAbout').value.trim();
+const skills=document.getElementById('cvSkills').value.trim();
+if(!name){alert('اكتب اسمك أولاً');return;}
+const win=window.open('','_blank');
+if(!win){alert('اسمح بفتح النوافذ المنبثقة لطباعة السيرة الذاتية');return;}
+const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+win.document.write('<!DOCTYPE html><html lang="ar" dir="rtl"><meta charset="UTF-8"><title>CV - '+esc(name)+'</title><style>body{font-family:Arial;padding:40px;color:#17233a;line-height:1.8}h1{color:#2459a5}h2{border-bottom:1px solid #ccc;padding-bottom:5px}p{white-space:pre-wrap}@media print{body{padding:20px}}</style><h1>'+esc(name)+'</h1><h3>'+esc(job)+'</h3><p>'+esc(email)+' | '+esc(phone)+'</p><h2>نبذة شخصية</h2><p>'+esc(about)+'</p><h2>المهارات</h2><p>'+esc(skills)+'</p><script>window.onload=()=>window.print();<\/script></html>');
+win.document.close();
 }
 </script>
-  </html>
+</body>
+</html>
