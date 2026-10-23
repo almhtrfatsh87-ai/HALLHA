@@ -116,5 +116,61 @@ document.getElementById('message').textContent=q?(count?'تم العثور عل�
 }
 document.getElementById('search').addEventListener('input',searchTools);
 </script>
-</body>
+</body><section style="background:#111b30;padding:25px;border-radius:15px;margin:30px 15px;text-align:center;border:1px solid #273653">
+<h2>📄 دمج ملفات PDF</h2>
+<p style="color:#b7c1d5">اختر ملفين PDF أو أكثر لدمجهم في ملف واحد</p>
+
+<input type="file" id="pdfFiles" accept=".pdf,application/pdf" multiple style="margin:20px;color:white;max-width:100%">
+
+<br>
+
+<button onclick="mergePDF()" style="background:#3979ee;color:white;border:0;padding:13px 25px;border-radius:9px">
+دمج الملفات
+</button>
+
+<p id="pdfStatus" style="margin-top:15px;color:#8cb7ff"></p>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+
+<script>
+async function mergePDF(){
+ const input=document.getElementById("pdfFiles");
+ const status=document.getElementById("pdfStatus");
+ const files=Array.from(input.files);
+
+ if(files.length<2){
+  status.textContent="اختر ملفين PDF على الأقل";
+  return;
+ }
+
+ try{
+  status.textContent="جاري دمج الملفات...";
+  const merged=await PDFLib.PDFDocument.create();
+
+  for(const file of files){
+   const bytes=await file.arrayBuffer();
+   const pdf=await PDFLib.PDFDocument.load(bytes);
+   const pages=await merged.copyPages(pdf,pdf.getPageIndices());
+   pages.forEach(page=>merged.addPage(page));
+  }
+
+  const result=await merged.save();
+  const blob=new Blob([result],{type:"application/pdf"});
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement("a");
+
+  link.href=url;
+  link.download="HALLHA-Merged.pdf";
+  link.click();
+
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  status.textContent="تم دمج الملفات بنجاح!";
+
+ }catch(error){
+  status.textContent="حدث خطأ. تأكد أن الملفات PDF سليمة.";
+  console.error(error);
+ }
+}
+</script>
   </html>
