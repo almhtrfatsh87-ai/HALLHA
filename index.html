@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="HALLHA - أدوات ذكية ومجانية تساعدك في حياتك اليومية">
+<title>HALLHA | كل مشكلة لها حل</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#080d19;color:#fff;line-height:1.7}
+header{padding:20px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #263047}
+.logo{font-size:27px;font-weight:bold;color:#70a5ff}
+nav{display:flex;gap:20px;align-items:center}
+nav a{color:#ddd;text-decoration:none}
+.hero{text-align:center;padding:75px 20px 55px;background:radial-gradient(ellipse at top,#192c55,#080d19 70%)}
+.hero h1{font-size:42px;margin-bottom:15px}
+.hero h1 span{color:#70a5ff}
+.hero p{color:#b7c1d5;font-size:17px;margin-bottom:25px}
+.search{max-width:550px;margin:auto;display:flex;background:white;border-radius:12px;overflow:hidden;padding:5px}
+.search input{flex:1;min-width:0;border:0;padding:14px;outline:none;font-size:16px}
+.search button{background:#3979ee;color:white;border:0;padding:12px 20px;border-radius:9px}
+.container{max-width:1100px;margin:45px auto;padding:0 18px}
+.section-title{text-align:center;font-size:27px;margin-bottom:25px}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.tool{background:#111b30;border:1px solid #273653;border-radius:15px;padding:24px;text-decoration:none;color:white;transition:.2s}
+.tool:hover{border-color:#70a5ff;transform:translateY(-4px)}
+.tool .emoji{font-size:32px}
+.tool h3{margin:10px 0 5px}
+.tool p{color:#aab6cb;font-size:14px}
+.badge{display:inline-block;background:#18345d;color:#8cb7ff;padding:4px 10px;border-radius:20px;font-size:12px;margin-top:12px}
+footer{text-align:center;padding:30px;color:#8c99af;border-top:1px solid #263047;margin-top:50px}
+#message{color:#8cb7ff;text-align:center;margin-top:15px}
+button,a{cursor:pointer}
+@media(max-width:600px){.hero h1{font-size:31px}nav{gap:10px;font-size:13px}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">HALLHA</div>
+<nav>
+<a href="#tools">الأدوات</a>
+<a href="#about">عن المنصة</a>
+<button onclick="toggleLanguage()" style="padding:8px 12px;border:1px solid #5275ae;border-radius:8px;background:transparent;color:white">EN / AR</button>
+</nav>
+</header>
+
+<section class="hero">
+<h1 id="headline">كل مشكلة لها <span>حل</span></h1>
+<p id="subtitle">أدوات مجانية وذكية تساعدك على إنجاز مهامك بسهولة.</p>
+<div class="search">
+<input id="search" placeholder="ابحث عن الأداة التي تحتاجها...">
+<button onclick="searchTools()" id="searchButton">بحث</button>
+</div>
+<div id="message"></div>
+</section>
+
+<main class="container" id="tools">
+<h2 class="section-title" id="toolsTitle">اكتشف أدواتنا</h2>
+<div class="tools" id="toolList">
+<div class="tool" data-search="pdf ملفات تحويل دمج ضغط">
+<div class="emoji">📄</div><h3>أدوات PDF</h3><p>إدارة ملفات PDF بسهولة.</p><span class="badge">مجاني</span>
+</div>
+<div class="tool" data-search="image صور ضغط حجم">
+<div class="emoji">🖼️</div><h3>أدوات الصور</h3><p>ضغط الصور وتغيير أحجامها.</p><span class="badge">مجاني</span>
+</div>
+<div class="tool" data-search="calculator حاسبة حساب">
+<div class="emoji">🧮</div><h3>الحاسبات الذكية</h3><p>احسب النسب والأرباح والخصومات.</p><span class="badge">مجاني</span>
+</div>
+<div class="tool" data-search="cv jobs وظيفة سيرة ذاتية">
+<div class="emoji">💼</div><h3>إنشاء السيرة الذاتية</h3><p>جهز سيرتك الذاتية باحترافية.</p><span class="badge">مجاني</span>
+</div>
+<div class="tool" data-search="qr code رمز">
+<div class="emoji">🔳</div><h3>إنشاء QR</h3><p>أنشئ رمز QR بسهولة.</p><span class="badge">مجاني</span>
+</div>
+<div class="tool" data-search="text كتابة ترجمة">
+<div class="emoji">✍️</div><h3>أدوات النصوص</h3><p>أدوات مفيدة لتنظيم النصوص.</p><span class="badge">مجاني</span>
+</div>
+<div class="tool" data-search="ai ذكاء اصطناعي">
+<div class="emoji">🤖</div><h3>الذكاء الاصطناعي</h3><p>مساعدك لإنجاز المهام بذكاء.</p><span class="badge">قريبًا</span>
+</div>
+<div class="tool" data-search="currency عملات تحويل">
+<div class="emoji">🌍</div><h3>الأدوات العالمية</h3><p>أدوات تساعدك أينما كنت.</p><span class="badge">قريبًا</span>
+</div>
+</div>
+</main>
+
+<section class="container" id="about">
+<h2 class="section-title">HALLHA - Every Problem Has a Solution</h2>
+<p style="text-align:center;color:#aab6cb">منصة عالمية هدفها تسهيل حياتك من خلال أدوات رقمية بسيطة ومفيدة.</p>
+</section>
+
+<footer>© 2026 HALLHA. All rights reserved.</footer>
+
+<script>
+let english=false;
+function toggleLanguage(){
+english=!english;
+document.documentElement.lang=english?'en':'ar';
+document.documentElement.dir=english?'ltr':'rtl';
+document.getElementById('headline').innerHTML=english?'Every Problem Has a <span>Solution</span>':'كل مشكلة لها <span>حل</span>';
+document.getElementById('subtitle').textContent=english?'Free and smart tools to make your daily tasks easier.':'أدوات مجانية وذكية تساعدك على إنجاز مهامك بسهولة.';
+document.getElementById('toolsTitle').textContent=english?'Explore Our Tools':'اكتشف أدواتنا';
+document.getElementById('search').placeholder=english?'Search for a tool...':'ابحث عن الأداة التي تحتاجها...';
+document.getElementById('searchButton').textContent=english?'Search':'بحث';
+}
+function searchTools(){
+let q=document.getElementById('search').value.toLowerCase().trim();
+let cards=document.querySelectorAll('.tool');
+let count=0;
+cards.forEach(card=>{
+let show=card.textContent.toLowerCase().includes(q)||card.dataset.search.includes(q);
+card.style.display=show?'block':'none';
+if(show)count++;
+});
+document.getElementById('message').textContent=q?(count?'تم العثور على '+count+' أدوات':'لم يتم العثور على أدوات'):'';
+}
+document.getElementById('search').addEventListener('input',searchTools);
+</script>
+</body>
+  </html>
